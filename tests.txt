@@ -1,0 +1,6 @@
+friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
+
+#my_each(friends) { |friend| puts friend }
+#my_each_with_index(friends) { |friend, index| puts friend + index.to_s }
+#my_select(friends) {|friend| friend != "Brian"}
+my_all(friends) {|friend| friend.length > 2}

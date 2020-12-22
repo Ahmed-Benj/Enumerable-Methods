@@ -30,10 +30,34 @@ def my_select (input_array)
 print output_array
 end
 
-
+def my_all (input_array)
+  output_array = []
+  result = false
+  my_each(input_array) do |element|
+  if yield(element)
+   output_array.push(element)
+  end
+  end
+  result = output_array.length == input_array.length
+ print result
+ end
+ 
+def my_any (input_array)
+  result = false
+  my_each(input_array) do |element|
+  if yield(element)
+   result = true
+   print result
+   exit
+  end
+  end
+ print result
+ end
 
 friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
 
 #my_each(friends) { |friend| puts friend }
 #my_each_with_index(friends) { |friend, index| puts friend + index.to_s }
-my_select(friends) {|friend| friend != "Brian"}
+#my_select(friends) {|friend| friend != "Brian"}
+#my_all(friends) {|friend| friend.length > 5}
+my_any(friends) {|friend| friend.length == 2}
