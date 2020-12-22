@@ -73,6 +73,16 @@ def my_count (input_array)
  print i
 end
 
+def my_map (input_array)
+  output_array = []
+  my_each(input_array) do |element|
+  if yield(element)
+   output_array.push(element)
+  end
+  end
+ print output_array
+ end
+
 friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
 
 #my_each(friends) { |friend| puts friend }
@@ -81,4 +91,5 @@ friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
 #my_all(friends) {|friend| friend.length > 5}
 #my_any(friends) {|friend| friend.length == 2}
 #my_none(friends) {|friend| friend.length > 5}
-my_count(friends)
+#my_count(friends)
+my_map(friends) {|friend| friend.length > 5}
