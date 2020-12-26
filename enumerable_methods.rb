@@ -65,10 +65,9 @@ def my_any (input_array)
  end
 
 def my_count (input_array)
- output_array = []
  i = 0
  my_each(input_array) do |element|
-   i += 1
+  i += 1
  end
  print i
 end
@@ -81,10 +80,19 @@ def my_map (input_array)
   end
   end
  print output_array
- end
+end
+
+def my_inject (input_array)
+  sum = 0
+  my_each(input_array) do |element|
+   sum = yield(sum,element)
+  end
+ print sum
+end
+
 
 friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
-
+friends = [9,0,1,2]
 #my_each(friends) { |friend| puts friend }
 #my_each_with_index(friends) { |friend, index| puts friend + index.to_s }
 #my_select(friends) {|friend| friend != "Brian"}
@@ -92,4 +100,5 @@ friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
 #my_any(friends) {|friend| friend.length == 2}
 #my_none(friends) {|friend| friend.length > 5}
 #my_count(friends)
-my_map(friends) {|friend| friend.length > 5}
+#my_map(friends) {|friend| friend.length > 5}
+my_inject(friends) {|friend, sum| sum + friend}
