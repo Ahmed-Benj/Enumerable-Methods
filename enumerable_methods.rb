@@ -1,28 +1,30 @@
-def my_each (array)
-  iterator = 0
-  while iterator < array.length
+module Enumerable
 
-    yield(array[iterator])
+  def my_each
+    iterator = 0
+    while iterator < self.length
 
-    iterator += 1
+      yield(self[iterator])
 
+      iterator += 1
+
+    end
   end
-end
 
-def my_each_with_index (array)
-  iterator = 0
-  while iterator < array.length
+  def my_each_with_index
+    iterator = 0
+    while iterator < self.length
 
-    yield(array[iterator],iterator)
+      yield(self[iterator],iterator)
 
-    iterator += 1
+      iterator += 1
 
+    end
   end
-end
 
-def my_select (input_array)
+def my_select
  output_array = []
- my_each(input_array) do |element|
+ self.my_each do |element|
  if yield(element)
   output_array.push(element)
  end
@@ -30,20 +32,22 @@ def my_select (input_array)
 print output_array
 end
 
-def my_all (input_array)
+
+
+def my_all
   output_array = []
-  my_each(input_array) do |element|
+  self.my_each do |element|
   if yield(element)
    output_array.push(element)
   end
   end
-  result = output_array.length == input_array.length
+  result = output_array.length == self.length
  print result
  end
  
-def my_any (input_array)
+def my_any 
   result = false
-  my_each(input_array) do |element|
+  self.my_each do |element|
   if yield(element)
    result = true
    print result
@@ -51,11 +55,11 @@ def my_any (input_array)
   end
   end
  print result
- end
+end
 
- def my_none (input_array)
+ def my_none
   output_array = []
-  my_each(input_array) do |element|
+  self.my_each do |element|
   if yield(element)
    output_array.push(element)
   end
@@ -64,17 +68,17 @@ def my_any (input_array)
  print result
  end
 
-def my_count (input_array)
+def my_count
  i = 0
- my_each(input_array) do |element|
+ self.my_each do |element|
   i += 1
  end
  print i
 end
 
-def my_map (input_array)
+def my_map
   output_array = []
-  my_each(input_array) do |element|
+  self.my_each do |element|
   if yield(element)
    output_array.push(element)
   end
@@ -82,23 +86,36 @@ def my_map (input_array)
  print output_array
 end
 
-def my_inject (input_array)
-  sum = 0
-  my_each(input_array) do |element|
-   sum = yield(sum,element)
+def my_inject
+  sum = self[0]
+  temp = self.shift
+  self.my_each do |element|
+    sum = yield(sum,element)
   end
- print sum
+  print sum
 end
 
+end
 
 friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
-friends = [9,0,1,2]
+
+friends = [3,4,5]
+
+def multiply_els(array)
+  array.my_inject do |sum, friend|
+    sum = sum * friend
+  end
+end 
+
+#friends.my_each { |friend| puts friend }
 #my_each(friends) { |friend| puts friend }
-#my_each_with_index(friends) { |friend, index| puts friend + index.to_s }
-#my_select(friends) {|friend| friend != "Brian"}
-#my_all(friends) {|friend| friend.length > 5}
+#friends.my_each_with_index { |friend, index| puts friend + index.to_s }
+#friends.my_select {|friend| friend != "Brian"}
+
+#friends.my_all {|friend| friend.length > 5}
 #my_any(friends) {|friend| friend.length == 2}
-#my_none(friends) {|friend| friend.length > 5}
+#my_none(friends){|friend| friend.length > 5}
 #my_count(friends)
 #my_map(friends) {|friend| friend.length > 5}
-my_inject(friends) {|friend, sum| sum + friend}
+friends.my_inject {|sum, friend| sum + friend}
+#multiply_els(friends)
