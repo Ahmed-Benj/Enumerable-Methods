@@ -89,6 +89,7 @@ module Enumerable
     self.my_each do |element|
       output_array.push(proc_arg.call(element))
     end
+    #output_array.compact
     print output_array
   end
 
@@ -128,11 +129,7 @@ friends_ints = [3,4,5]
 #multiply_els(friends)
 
 #13
-proc = Proc.new do |friend| 
-  if friend.length > 5 then
-     friend 
-  else
-     print "nothing to push"
-  end
-end
+proc = Proc.new{|friend| friend.length > 5 ? friend : nil}
+proc = Proc.new{|friend| friend+"s"}
+
 friends_strings.my_map_proc(proc)
