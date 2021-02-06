@@ -130,7 +130,7 @@ module Enumerable
   end
 end
 
-#input section
+# input section
 
 # friends = %w[Sharon Leo Leila Brian Arun]
 
