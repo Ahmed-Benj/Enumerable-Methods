@@ -130,11 +130,13 @@ module Enumerable
   end
 end
 
-friends = %w[Sharon Leo Leila Brian Arun]
+#input section
 
-friends_strings = %w[Sharon Leo Leila Brian Arun]
+# friends = %w[Sharon Leo Leila Brian Arun]
 
-friends_ints = [3, 4, 5]
+# friends_strings = %w[Sharon Leo Leila Brian Arun]
+
+# friends_ints = [3, 4, 5]
 
 # 3
 # friends.my_each { |friend| puts friend }
