@@ -2,13 +2,14 @@
 module Enumerable
   # 3
   def my_each
-    iterator = 0
-    while iterator < length
-
-      yield(self[iterator])
-
-      iterator += 1
-
+    if block_given?
+      iterator = 0
+      while iterator < length
+        yield(self[iterator])
+        iterator += 1
+      end
+    else
+      to_enum(__method__)
     end
   end
 
@@ -132,14 +133,14 @@ end
 
 # input section
 
-# friends = %w[Sharon Leo Leila Brian Arun]
+ friends = %w[Sharon Leo Leila Brian Arun]
 
 # friends_strings = %w[Sharon Leo Leila Brian Arun]
 
 # friends_ints = [3, 4, 5]
 
 # 3
-# friends.my_each { |friend| puts friend }
+ friends.my_each #{ |friend| puts friend }
 
 # 4
 # friends.my_each_with_index { |friend, index| puts friend + index.to_s }
