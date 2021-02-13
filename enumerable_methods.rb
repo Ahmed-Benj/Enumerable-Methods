@@ -42,7 +42,7 @@ module Enumerable
   # 6
   def my_all(pattern = nil)
     output_array = []
-    if pattern and !block_given?
+    if pattern
       my_each do |element|
         output_array.push(element) if pattern === element
       end
@@ -60,13 +60,31 @@ module Enumerable
   end
 
   # 7
-  def my_any
+  def my_any(pattern = nil)
     result = false
-    my_each do |element|
-      if yield(element)
-        result = true
-        print result
-        exit
+    if pattern
+      my_each do |element|
+        if pattern === element
+          result = true
+          print result
+          exit
+        end
+      end
+    elsif block_given?
+      my_each do |element|
+        if yield(element)
+          result = true
+          print result
+          exit
+        end
+      end
+    elsif !block_given?
+      my_each do |obj|
+        if yield(obj)
+          result = true
+          print result
+          exit
+        end
       end
     end
     print result
@@ -168,16 +186,22 @@ friends = %w[Sharon Leo Leila Brian Arun]
 # [1,2,3,4,5].my_select { |num|  num.even?  }
 
 # 6
-# friends_strings.my_all {|friend| friend.length > 5}
- puts %w[ant bear cat].my_all { |word| word.length >= 3 }
- puts %w[ant bear cat].my_all { |word| word.length >= 4 }
- puts %w[ant bear cat].my_all(/t/)
- puts [1, 2i, 3.14].my_all(Numeric)
- puts [nil, true, 99].my_all
- puts [].my_all
+# puts friends_strings.my_all {|friend| friend.length > 5}
+# puts %w[ant bear cat].my_all { |word| word.length >= 3 }
+# puts %w[ant bear cat].my_all { |word| word.length >= 4 }
+# puts %w[ant bear cat].my_all(/t/)
+# puts [1, 2i, 3.14].my_all(Numeric)
+# puts [nil, true, 99].my_all
+# puts [].my_all
 
 # 7
-# friends_strings.my_any {|friend| friend.length == 2}
+ #friends_strings.my_any {|friend| friend.length == 3}
+# puts %w[ant bear cat].any? { |word| word.length >= 3 } #=> true
+# puts %w[ant bear cat].any? { |word| word.length >= 4 } #=> true
+# puts %w[ant bear cat].any?(/d/)                        #=> false
+# puts [nil, true, 99].any?(Integer)                     #=> true
+# puts [nil, true, 99].any?                              #=> true
+# puts [].any?                                           #=> false
 
 # 8
 # friends_strings.my_none{|friend| friend.length > 5}
