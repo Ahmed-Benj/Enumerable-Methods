@@ -66,24 +66,18 @@ module Enumerable
       my_each do |element|
         if pattern === element
           result = true
-          print result
-          exit
         end
       end
     elsif block_given?
       my_each do |element|
         if yield(element)
-          result = true
-          print result
-          exit
+          result = true         
         end
       end
     elsif !block_given?
       my_each do |obj|
-        if yield(obj)
+        if obj
           result = true
-          print result
-          exit
         end
       end
     end
@@ -91,22 +85,43 @@ module Enumerable
   end
 
   # 8
-  def my_none
+  def my_none(pattern = nil)
     output_array = []
-    my_each do |element|
-      output_array.push(element) if yield(element)
+    if pattern
+      my_each do |element|
+        output_array.push(element) if pattern === element
+      end
+    elsif block_given?
+      my_each do |element|
+        output_array.push(element) if yield(element)
+      end
+    elsif !block_given?
+      my_each do |obj|
+        output_array.push(obj) if obj != false and obj != nil
+      end
     end
     result = output_array.length.zero?
     print result
   end
 
   # 9
-  def my_count
-    i = 0
-    my_each do
-      i += 1
+  def my_count(arg = nil)
+    iterator = 0
+    output = 0
+    if (arg)
+      my_each do |element|
+        output += 1 if arg == element
+      end
+    elsif block_given?
+      my_each do |element|
+        output += 1 if yield(element)
+      end
+    elsif !block_given?
+      my_each do |element|
+        output += 1
+      end
     end
-    print i
+    print output
   end
 
   # 10
@@ -195,19 +210,31 @@ friends = %w[Sharon Leo Leila Brian Arun]
 # puts [].my_all
 
 # 7
- #friends_strings.my_any {|friend| friend.length == 3}
-# puts %w[ant bear cat].any? { |word| word.length >= 3 } #=> true
-# puts %w[ant bear cat].any? { |word| word.length >= 4 } #=> true
-# puts %w[ant bear cat].any?(/d/)                        #=> false
-# puts [nil, true, 99].any?(Integer)                     #=> true
-# puts [nil, true, 99].any?                              #=> true
-# puts [].any?                                           #=> false
+# puts friends_strings.my_any {|friend| friend.length == 3}
+# puts %w[ant bear cat].my_any { |word| word.length >= 3 } #=> true
+# puts %w[ant bear cat].my_any { |word| word.length >= 4 } #=> true
+# puts %w[ant bear cat].my_any(/d/)                        #=> false
+# puts [nil, true, 99].my_any(Integer)                     #=> true
+# puts [nil, true, 99].my_any                              #=> true
+# puts [].my_any                                           #=> false
 
 # 8
 # friends_strings.my_none{|friend| friend.length > 5}
+# puts %w{ant bear cat}.my_none { |word| word.length == 5 } #=> true
+# puts %w{ant bear cat}.my_none { |word| word.length >= 4 } #=> false
+# puts %w{ant bear cat}.my_none(/d/)                        #=> true
+# puts [1, 3.14, 42].my_none(Float)                         #=> false
+# puts [].my_none                                           #=> true
+# puts [nil].my_none                                        #=> true
+# puts [nil, false].my_none                                 #=> true
+# puts [nil, false, true].my_none                           #=> false
 
 # 9
 # friends_ints.my_count
+
+puts [1, 2, 4, 2].my_count(2)            #=> 2
+puts [1, 2, 4, 2].my_count               #=> 4
+puts [1, 2, 4, 2].my_count{ |x| x%2==0 } #=> 3
 
 # 10
 # friends_strings.my_map {|friend| friend.length > 5}
