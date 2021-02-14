@@ -144,13 +144,40 @@ module Enumerable
   end
 
   # 11
-  def my_inject
-    sum = self[0]
-    temp = drop(1)
-    temp.my_each do |element|
-      sum = yield(sum, element)
+  def my_inject(*args)
+    arr = self.to_a
+    if block_given?
+      if (args.length == 1)
+        result = args[0]
+        result = yield(result, arr[0])
+        temp = arr.drop(1)
+        temp.my_each do |element|
+          result = yield(result, element)
+        end
+      else
+        result = arr[0]
+        temp = arr.drop(1)
+        temp.my_each do |element|
+          result = yield(result, element)
+        end
+      end
+    elsif !block_given?
+      if (args.length == 1)
+          acc = args[0]
+          result = arr[0]
+          temp = arr.drop(1)
+          temp.my_each do |element|
+            result = result.send(acc,element)
+          end
+      elsif (args.length == 2)
+        result = args[0]
+        acc = args[1]
+        arr.my_each do |element|
+          result = result.send(acc,element)
+        end
+      end
     end
-    print sum
+    print result
   end
 
   # 12
@@ -191,11 +218,11 @@ end
 
 # input section
 
-friends = %w[Sharon Leo Leila Brian Arun]
+ friends = %w[Sharon Leo Leila Brian Arun]
 
  friends_strings = %w[Sharon Leo Leila Brian Arun]
 
-# friends_ints = [3, 4, 5]
+ friends_ints = [3, 4, 5]
 
 # 3
 # friends.my_each { |friend| puts friend }
@@ -251,14 +278,11 @@ friends = %w[Sharon Leo Leila Brian Arun]
 # (1..4).my_map { "cat"  }   #=> ["cat", "cat", "cat", "cat"]
 
 # 11
-# friends_ints.my_inject { |sum, friend| sum + friend }
-# Sum some numbers
+puts friends_ints.my_inject { |sum, friend| sum + friend }
+puts friends_ints.my_inject { |sum, friend| sum * friend }
 puts (5..10).my_inject(:+)                             #=> 45
-# Same using a block and inject
-puts(5..10).my_inject { |sum, n| sum + n }            #=> 45
-# Multiply some numbers
+puts (5..10).my_inject { |sum, n| sum + n }            #=> 45
 puts (5..10).my_inject(1, :*)                          #=> 151200
-# Same using a block
 puts (5..10).my_inject(1) { |product, n| product * n } #=> 151200
 # find the longest word
 longest = %w{ cat sheep bear }.my_inject do |memo, word|
