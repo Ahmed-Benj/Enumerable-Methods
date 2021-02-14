@@ -52,7 +52,7 @@ module Enumerable
       end
     elsif !block_given?
       my_each do |obj|
-        output_array.push(obj) if obj != false and obj != nil
+        output_array.push(obj) if obj != false and !obj.nil?
       end
     end
     result = output_array.length == length
@@ -64,21 +64,15 @@ module Enumerable
     result = false
     if pattern
       my_each do |element|
-        if pattern === element
-          result = true
-        end
+        result = true if pattern === element
       end
     elsif block_given?
       my_each do |element|
-        if yield(element)
-          result = true         
-        end
+        result = true if yield(element)
       end
     elsif !block_given?
       my_each do |obj|
-        if obj
-          result = true
-        end
+        result = true if obj
       end
     end
     print result
@@ -97,7 +91,7 @@ module Enumerable
       end
     elsif !block_given?
       my_each do |obj|
-        output_array.push(obj) if obj != false and obj != nil
+        output_array.push(obj) if obj != false and !obj.nil?
       end
     end
     result = output_array.length.zero?
@@ -106,9 +100,8 @@ module Enumerable
 
   # 9
   def my_count(arg = nil)
-    iterator = 0
     output = 0
-    if (arg)
+    if arg
       my_each do |element|
         output += 1 if arg == element
       end
@@ -117,7 +110,7 @@ module Enumerable
         output += 1 if yield(element)
       end
     elsif !block_given?
-      my_each do |element|
+      my_each do |_element|
         output += 1
       end
     end
@@ -127,8 +120,8 @@ module Enumerable
   # 10
   def my_map
     arr = nil
-    array_type = lambda do |input_type|
-      arr = self.to_a
+    array_type = lambda do |_input_type|
+      arr = to_a
     end
     array_type.call(self.class)
 
@@ -145,35 +138,32 @@ module Enumerable
 
   # 11
   def my_inject(*args)
-    arr = self.to_a
+    arr = to_a
     if block_given?
-      if (args.length == 1)
+      if args.length == 1
         result = args[0]
         result = yield(result, arr[0])
-        temp = arr.drop(1)
-        temp.my_each do |element|
-          result = yield(result, element)
-        end
       else
+        result = arr[0]
+      end
+      temp = arr.drop(1)
+      temp.my_each do |element|
+        result = yield(result, element)
+      end
+    elsif !block_given?
+      case args.length
+      when 1
+        acc = args[0]
         result = arr[0]
         temp = arr.drop(1)
         temp.my_each do |element|
-          result = yield(result, element)
+          result = result.send(acc, element)
         end
-      end
-    elsif !block_given?
-      if (args.length == 1)
-          acc = args[0]
-          result = arr[0]
-          temp = arr.drop(1)
-          temp.my_each do |element|
-            result = result.send(acc,element)
-          end
-      elsif (args.length == 2)
+      when 2
         result = args[0]
         acc = args[1]
         arr.my_each do |element|
-          result = result.send(acc,element)
+          result = result.send(acc, element)
         end
       end
     end
@@ -218,11 +208,11 @@ end
 
 # input section
 
- friends = %w[Sharon Leo Leila Brian Arun]
+friends = %w[Sharon Leo Leila Brian Arun]
 
- friends_strings = %w[Sharon Leo Leila Brian Arun]
+friends_strings = %w[Sharon Leo Leila Brian Arun]
 
- friends_ints = [3, 4, 5]
+friends_ints = [3, 4, 5]
 
 # 3
 # friends.my_each { |friend| puts friend }
@@ -294,9 +284,9 @@ end
 # friends_ints.multiply_els
 
 # 13
-#proc = Proc.new{|friend| friend.length > 5 ? friend : nil}
-#proc = Proc.new{|friend| friend+"s"}
-#friends_strings.my_map_proc(proc)
+# proc = Proc.new{|friend| friend.length > 5 ? friend : nil}
+# proc = Proc.new{|friend| friend+"s"}
+# friends_strings.my_map_proc(proc)
 
 # 14
 # proc = proc { |friend| friend.length > 5 ? friend : nil }
