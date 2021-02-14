@@ -198,7 +198,7 @@ module Enumerable
   end
 
   # 14
-  def my_map_proc_block(proc_arg, &block_arg)
+  def my_map_proc_block(proc_arg = nil, &block_arg)
     output_array = []
 
     if proc_arg
@@ -278,25 +278,25 @@ end
 # (1..4).my_map { "cat"  }   #=> ["cat", "cat", "cat", "cat"]
 
 # 11
-puts friends_ints.my_inject { |sum, friend| sum + friend }
-puts friends_ints.my_inject { |sum, friend| sum * friend }
-puts (5..10).my_inject(:+)                             #=> 45
-puts (5..10).my_inject { |sum, n| sum + n }            #=> 45
-puts (5..10).my_inject(1, :*)                          #=> 151200
-puts (5..10).my_inject(1) { |product, n| product * n } #=> 151200
-# find the longest word
-longest = %w{ cat sheep bear }.my_inject do |memo, word|
-   memo.length > word.length ? memo : word
-end
-puts longest                                        #=> "sheep"
+# puts friends_ints.my_inject { |sum, friend| sum + friend }
+# puts friends_ints.my_inject { |sum, friend| sum * friend }
+# puts (5..10).my_inject(:+)                             #=> 45
+# puts (5..10).my_inject { |sum, n| sum + n }            #=> 45
+# puts (5..10).my_inject(1, :*)                          #=> 151200
+# puts (5..10).my_inject(1) { |product, n| product * n } #=> 151200
+# # find the longest word
+# longest = %w{ cat sheep bear }.my_inject do |memo, word|
+#    memo.length > word.length ? memo : word
+# end
+# puts longest                                        #=> "sheep"
 
 # 12
 # friends_ints.multiply_els
 
 # 13
-# proc = Proc.new{|friend| friend.length > 5 ? friend : nil}
-# proc = Proc.new{|friend| friend+"s"}
-# friends_strings.my_map_proc(proc)
+#proc = Proc.new{|friend| friend.length > 5 ? friend : nil}
+#proc = Proc.new{|friend| friend+"s"}
+#friends_strings.my_map_proc(proc)
 
 # 14
 # proc = proc { |friend| friend.length > 5 ? friend : nil }
