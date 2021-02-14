@@ -126,9 +126,19 @@ module Enumerable
 
   # 10
   def my_map
+    arr = nil
+    array_type = lambda do |input_type|
+      arr = self.to_a
+    end
+    array_type.call(self.class)
+
     output_array = []
-    my_each do |element|
-      output_array.push(element) if yield(element)
+    if block_given?
+      arr.my_each do |element|
+        output_array.push(yield(element))
+      end
+    else
+      to_enum(__method__)
     end
     print output_array
   end
@@ -231,16 +241,30 @@ friends = %w[Sharon Leo Leila Brian Arun]
 
 # 9
 # friends_ints.my_count
-
-puts [1, 2, 4, 2].my_count(2)            #=> 2
-puts [1, 2, 4, 2].my_count               #=> 4
-puts [1, 2, 4, 2].my_count{ |x| x%2==0 } #=> 3
+# puts [1, 2, 4, 2].my_count(2)            #=> 2
+# puts [1, 2, 4, 2].my_count               #=> 4
+# puts [1, 2, 4, 2].my_count{ |x| x%2==0 } #=> 3
 
 # 10
-# friends_strings.my_map {|friend| friend.length > 5}
+# puts friends_strings.my_map {|friend| friend.length > 5}
+# (1..4).my_map { |i| i*i }      #=> [1, 4, 9, 16]
+# (1..4).my_map { "cat"  }   #=> ["cat", "cat", "cat", "cat"]
 
 # 11
 # friends_ints.my_inject { |sum, friend| sum + friend }
+# Sum some numbers
+puts (5..10).my_inject(:+)                             #=> 45
+# Same using a block and inject
+puts(5..10).my_inject { |sum, n| sum + n }            #=> 45
+# Multiply some numbers
+puts (5..10).my_inject(1, :*)                          #=> 151200
+# Same using a block
+puts (5..10).my_inject(1) { |product, n| product * n } #=> 151200
+# find the longest word
+longest = %w{ cat sheep bear }.my_inject do |memo, word|
+   memo.length > word.length ? memo : word
+end
+puts longest                                        #=> "sheep"
 
 # 12
 # friends_ints.multiply_els
