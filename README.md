@@ -29,7 +29,7 @@ Coming soon
 
 ### Prerequisites
 
-- Text Editor (VSCode is suggested.)
+- Text Editor (VSCode for example)
 - [Ruby](https://ruby-doc.org/downloads/)
 
 To get a running copy, follow the steps below.
