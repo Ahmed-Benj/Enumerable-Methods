@@ -9,6 +9,7 @@ friends_ints = [3, 4, 5]
 
 # 3
 # friends.my_each { |friend| puts friend }
+# (1..10).my_each { |friend| puts friend }
 
 # 4
 # friends.my_each_with_index { |friend, index| puts friend + index.to_s }

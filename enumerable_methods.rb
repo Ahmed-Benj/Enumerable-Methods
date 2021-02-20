@@ -6,7 +6,7 @@ module Enumerable
     if block_given?
       iterator = 0
       arr = self.to_a
-      while iterator < length
+      while iterator < arr.length
         yield(arr[iterator])
         iterator += 1
       end
@@ -21,7 +21,7 @@ module Enumerable
     if block_given?
       iterator = 0
       arr = self.to_a
-      while iterator < length
+      while iterator < arr.length
         yield(arr[iterator], iterator)
         iterator += 1
       end
@@ -210,3 +210,15 @@ module Enumerable
     print output_array
   end
 end
+
+# input section
+
+friends = %w[Sharon Leo Leila Brian Arun]
+
+friends_strings = %w[Sharon Leo Leila Brian Arun]
+
+friends_ints = [3, 4, 5]
+
+# 3
+# friends.my_each { |friend| puts friend }
+(1..10).my_each { |friend| puts friend }
