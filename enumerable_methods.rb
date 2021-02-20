@@ -9,6 +9,7 @@ module Enumerable
         yield(self[iterator])
         iterator += 1
       end
+      return self
     else
       to_enum(__method__)
     end
