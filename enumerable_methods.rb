@@ -5,11 +5,12 @@ module Enumerable
   def my_each
     if block_given?
       iterator = 0
+      arr = self.to_a
       while iterator < length
-        yield(self[iterator])
+        yield(arr[iterator])
         iterator += 1
       end
-      return self
+      return arr
     else
       to_enum(__method__)
     end
@@ -19,10 +20,12 @@ module Enumerable
   def my_each_with_index
     if block_given?
       iterator = 0
+      arr = self.to_a
       while iterator < length
-        yield(self[iterator], iterator)
+        yield(arr[iterator], iterator)
         iterator += 1
       end
+      return arr
     else
       to_enum(__method__)
     end
