@@ -10,7 +10,7 @@ module Enumerable
         yield(arr[iterator])
         iterator += 1
       end
-      return arr
+      return self
     else
       to_enum(__method__)
     end
@@ -25,7 +25,7 @@ module Enumerable
         yield(arr[iterator], iterator)
         iterator += 1
       end
-      return arr
+      return self
     else
       to_enum(__method__)
     end
@@ -211,14 +211,4 @@ module Enumerable
   end
 end
 
-# input section
-
-friends = %w[Sharon Leo Leila Brian Arun]
-
-friends_strings = %w[Sharon Leo Leila Brian Arun]
-
-friends_ints = [3, 4, 5]
-
-# 3
-# friends.my_each { |friend| puts friend }
-(1..10).my_each { |friend| puts friend }
+ (1..10).my_each { |friend| puts friend }
