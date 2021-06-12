@@ -1,5 +1,5 @@
 # rubocop:disable all 
-# 2
+# 2 3
 module Enumerable
   # 3
   def my_each
