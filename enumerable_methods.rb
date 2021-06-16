@@ -1,4 +1,4 @@
-# rubocop:disable all 
+# rubocop:disable all
 # 2 3
 module Enumerable
   # 3
@@ -211,4 +211,5 @@ module Enumerable
   end
 end
 
- (1..10).my_each { |friend| puts friend }
+friends = %w[Sharon Leo Leila Brian Arun]
+puts (friends.my_each).is_a?(Enumerator)
