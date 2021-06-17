@@ -27,4 +27,12 @@ describe Enumerable do
       expect(friends.my_select { |friend| friend == 'Brian' }).to eq(friends.select { |friend| friend == 'Brian' })
     end
   end
+
+  describe '#my_all' do
+    it 'Returns true if all friends length > 5' do
+      expect(friends_strings.my_all { |friend| friend.length > 5 }).to eq(friends_strings.all? do |friend|
+                                                                            friend.length > 5
+                                                                          end)
+    end
+  end
 end

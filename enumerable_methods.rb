@@ -61,7 +61,7 @@ module Enumerable
       end
     end
     result = output_array.length == length
-    print result
+    #print result
   end
 
   # 7
@@ -210,3 +210,4 @@ module Enumerable
     print output_array
   end
 end
+
