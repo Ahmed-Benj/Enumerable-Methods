@@ -1,4 +1,5 @@
 require_relative '../enumerable_methods'
+# rubocop:disable all
 
 describe Enumerable do
   let(:ints) { [3, 4, 5] }
