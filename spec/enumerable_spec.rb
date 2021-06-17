@@ -35,7 +35,16 @@ describe Enumerable do
                                                                           end)
     end
   end
+
   describe '#my_any' do
+    it 'Returns true if any friend length = 3' do
+      expect(friends_strings.my_any { |friend| friend.length == 3 }).to eq(friends_strings.any? do |friend|
+                                                                             friend.length == 3
+                                                                           end)
+    end
+  end
+
+  describe '#my_none' do
     it 'Returns true if any friend length = 3' do
       expect(friends_strings.my_any { |friend| friend.length == 3 }).to eq(friends_strings.any? do |friend|
                                                                              friend.length == 3
