@@ -1,5 +1,5 @@
 require_relative '../enumerable_methods'
-# rubocop:disable all
+##rubocop:disable all
 
 describe Enumerable do
   let(:ints) { [3, 4, 5] }
@@ -33,6 +33,13 @@ describe Enumerable do
       expect(friends_strings.my_all { |friend| friend.length > 5 }).to eq(friends_strings.all? do |friend|
                                                                             friend.length > 5
                                                                           end)
+    end
+  end
+  describe '#my_any' do
+    it 'Returns true if any friend length = 3' do
+      expect(friends_strings.my_any { |friend| friend.length == 3 }).to eq(friends_strings.any? do |friend|
+                                                                             friend.length == 3
+                                                                           end)
     end
   end
 end

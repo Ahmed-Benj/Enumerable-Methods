@@ -61,7 +61,6 @@ module Enumerable
       end
     end
     result = output_array.length == length
-    #print result
   end
 
   # 7
@@ -80,7 +79,7 @@ module Enumerable
         result = true if obj
       end
     end
-    print result
+    result
   end
 
   # 8
