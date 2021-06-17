@@ -210,12 +210,3 @@ module Enumerable
     print output_array
   end
 end
-
-friends = %w[Sharon Leo Leila Brian Arun]
-puts (friends.my_each).is_a?(Enumerator)
-
-friends.my_select {|friend| friend != "Brian"}
-friends.select {|friend| friend != "Brian"}
-
-friends.my_each_with_index { |friend, index| puts friend + index.to_s }
-friends.each_with_index { |friend, index| puts friend + index.to_s }

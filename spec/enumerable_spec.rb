@@ -7,7 +7,7 @@ describe Enumerable do
 
   describe '#my_each' do
     it 'Executes a block of code' do
-      expect(ints.my_each { |x| x * 5 }).to eq(ints.each { |x| x * 5 })
+      expect(ints.my_each { |x| (x * 5) }).to eq(ints.each { |x| (x * 5) })
     end
   end
 
@@ -23,7 +23,7 @@ describe Enumerable do
 
   describe '#my_select' do
     it 'Select elements from array and put them into another' do
-      expect(friends.my_select { |friend| friend != 'Brian' }).to eq(friends.select { |friend| friend != 'Brian' })
+      expect(friends.my_select { |friend| friend == 'Brian' }).to eq(friends.select { |friend| friend == 'Brian' })
     end
   end
 end
