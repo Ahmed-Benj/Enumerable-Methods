@@ -2,8 +2,8 @@ require_relative '../enumerable_methods'
 
 describe Enumerable do
   let(:ints) { [3, 4, 5] }
-  friends = %w[Sharon Leo Leila Brian Arun]
-  friends_strings = %w[Sharon Leo Leila Brian Arun]
+  let(:friends) { %w[Sharon Leo Leila Brian Arun] }
+  let(:friends_strings) { %w[Sharon Leo Leila Brian Arun] }
 
   describe '#my_each' do
     it 'Executes a block of code' do
@@ -18,6 +18,12 @@ describe Enumerable do
              end).to eq(friends.each_with_index do |friend, index|
                           puts friend + index.to_s
                         end)
+    end
+  end
+
+  describe '#my_select' do
+    it 'Select elements from array and put them into another' do
+      expect(friends.my_select { |friend| friend != 'Brian' }).to eq(friends.reject { |friend| friend == 'Brian' })
     end
   end
 end
