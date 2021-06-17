@@ -23,7 +23,7 @@ describe Enumerable do
 
   describe '#my_select' do
     it 'Select elements from array and put them into another' do
-      expect(friends.my_select { |friend| friend != 'Brian' }).to eq(friends.reject { |friend| friend == 'Brian' })
+      expect(friends.my_select { |friend| friend != 'Brian' }).to eq(friends.select { |friend| friend != 'Brian' })
     end
   end
 end

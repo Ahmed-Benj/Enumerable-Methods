@@ -38,7 +38,7 @@ module Enumerable
       my_each do |element|
         output_array.push(element) if yield(element)
       end
-      print output_array
+      output_array
     else
       to_enum(__method__)
     end
@@ -213,3 +213,9 @@ end
 
 friends = %w[Sharon Leo Leila Brian Arun]
 puts (friends.my_each).is_a?(Enumerator)
+
+friends.my_select {|friend| friend != "Brian"}
+friends.select {|friend| friend != "Brian"}
+
+friends.my_each_with_index { |friend, index| puts friend + index.to_s }
+friends.each_with_index { |friend, index| puts friend + index.to_s }
