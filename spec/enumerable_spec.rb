@@ -1,5 +1,4 @@
 require_relative '../enumerable_methods'
-#rubocop:disable all
 
 describe Enumerable do
   let(:ints) { [3, 4, 5] }
@@ -26,6 +25,9 @@ describe Enumerable do
     it 'Select elements from array and put them into another' do
       expect(friends.my_select { |friend| friend == 'Brian' }).to eq(friends.select { |friend| friend == 'Brian' })
     end
+    it 'Select elements from array and put them into another' do
+      expect(friends.my_select { |friend| friend == 'Brian' }).not_to eq(['Arun'])
+    end
   end
 
   describe '#my_all' do
@@ -42,13 +44,17 @@ describe Enumerable do
                                                                              friend.length == 3
                                                                            end)
     end
+
+    it 'Returns false if no friend length = 10' do
+      expect(friends_strings.my_any { |friend| friend.length == 10 }).to eq(friends_strings.any? do |friend|
+                                                                              friend.length == 10
+                                                                            end)
+    end
   end
 
   describe '#my_none' do
     it 'Returns true if no friend length = 3' do
-      expect(friends_strings.my_none { |friend| friend.length == 3 }).to eq(friends_strings.none? do |friend|
-                                                                              friend.length == 3
-                                                                            end)
+      expect(friends_strings.my_none { |friend| friend.length == 3 }).to eq(false)
     end
   end
 
