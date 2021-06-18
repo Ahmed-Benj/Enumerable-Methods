@@ -47,11 +47,10 @@ describe Enumerable do
   describe '#my_none' do
     it 'Returns true if no friend length = 3' do
       expect(friends_strings.my_none { |friend| friend.length == 3 }).to eq(friends_strings.none? do |friend|
-                                                                             friend.length == 3
-                                                                           end)
+                                                                              friend.length == 3
+                                                                            end)
     end
   end
-
 
   describe '#my_count' do
     it 'Returns the number of elements in the array' do
@@ -61,14 +60,27 @@ describe Enumerable do
 
   describe '#my_map' do
     it 'Returns a modified array' do
-      expect(ints.my_map { |i| i*i }).to eq(ints.map { |i| i*i })
+      expect(ints.my_map { |i| i * i }).to eq(ints.map { |i| i * i })
     end
   end
-  
+
   describe '#my_inject' do
     it 'Returns the sum of array elements' do
       expect(ints.my_inject { |sum, friend| sum + friend }).to eq(ints.inject { |sum, friend| sum + friend })
     end
   end
 
+  describe '#my_map_proc' do
+    it 'Returns a modified array using proc' do
+      proc = proc { |friend| "#{friend}s" }
+      expect(friends_strings.my_map_proc(proc)).to eq(%w[Sharons Leos Leilas Brians Aruns])
+    end
+  end
+
+  describe '#my_map_proc_block' do
+    it 'Returns a modified array using proc instead of block' do
+      proc = proc { |friend| friend.length > 5 ? friend : nil }
+      expect(friends_strings.my_map_proc_block(proc) { |friend| "#{friend}s" }).to eq(['Sharon', nil, nil, nil, nil])
+    end
+  end
 end

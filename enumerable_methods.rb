@@ -187,7 +187,7 @@ module Enumerable
       output_array.push(proc_arg.call(element))
     end
     # output_array.compact
-    print output_array
+    output_array
   end
 
   # 14
@@ -205,7 +205,6 @@ module Enumerable
       end
     end
     # output_array.compact
-    print output_array
+    output_array
   end
 end
-
