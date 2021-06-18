@@ -1,4 +1,3 @@
-# rubocop:disable all
 # 2 3
 module Enumerable
   # 3
