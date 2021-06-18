@@ -59,6 +59,11 @@ describe Enumerable do
     end
   end
 
+  describe '#my_map' do
+    it 'Returns a modified array' do
+      expect(ints.my_map { |i| i*i }).to eq(ints.map { |i| i*i })
+    end
+  end
   
   describe '#my_inject' do
     it 'Returns the sum of array elements' do
