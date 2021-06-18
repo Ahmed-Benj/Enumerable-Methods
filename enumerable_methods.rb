@@ -136,7 +136,7 @@ module Enumerable
     else
       to_enum(__method__)
     end
-    print output_array
+    output_array
   end
 
   # 11
@@ -170,7 +170,7 @@ module Enumerable
         end
       end
     end
-    print result
+    result
   end
 
   # 12

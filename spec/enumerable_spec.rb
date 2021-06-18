@@ -54,8 +54,15 @@ describe Enumerable do
 
 
   describe '#my_count' do
-    it 'Returns the number of elements' do
+    it 'Returns the number of elements in the array' do
       expect(friends_strings.my_count).to eq(friends_strings.count)
+    end
+  end
+
+  
+  describe '#my_inject' do
+    it 'Returns the sum of array elements' do
+      expect(ints.my_inject { |sum, friend| sum + friend }).to eq(ints.inject { |sum, friend| sum + friend })
     end
   end
 
