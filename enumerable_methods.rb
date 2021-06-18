@@ -99,7 +99,6 @@ module Enumerable
       end
     end
     result = output_array.length.zero?
-    print result
   end
 
   # 9
