@@ -117,7 +117,7 @@ module Enumerable
         output += 1
       end
     end
-    print output
+    output
   end
 
   # 10

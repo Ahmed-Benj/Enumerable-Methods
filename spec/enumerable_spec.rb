@@ -1,5 +1,5 @@
 require_relative '../enumerable_methods'
-##rubocop:disable all
+#rubocop:disable all
 
 describe Enumerable do
   let(:ints) { [3, 4, 5] }
@@ -51,4 +51,12 @@ describe Enumerable do
                                                                            end)
     end
   end
+
+
+  describe '#my_count' do
+    it 'Returns the number of elements' do
+      expect(friends_strings.my_count).to eq(friends_strings.count)
+    end
+  end
+
 end
