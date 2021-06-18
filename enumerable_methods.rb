@@ -1,15 +1,17 @@
+# rubocop:disable all
+
 # 2 3
 module Enumerable
   # 3
   def my_each
     if block_given?
       iterator = 0
-      arr = self.to_a
+      arr = to_a
       while iterator < arr.length
         yield(arr[iterator])
         iterator += 1
       end
-      return self
+      self
     else
       to_enum(__method__)
     end
@@ -19,12 +21,12 @@ module Enumerable
   def my_each_with_index
     if block_given?
       iterator = 0
-      arr = self.to_a
+      arr = to_a
       while iterator < arr.length
         yield(arr[iterator], iterator)
         iterator += 1
       end
-      return self
+      self
     else
       to_enum(__method__)
     end
