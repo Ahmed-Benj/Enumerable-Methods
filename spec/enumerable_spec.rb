@@ -121,5 +121,10 @@ describe Enumerable do
       proc = proc { |friend| friend.length > 5 ? friend : nil }
       expect(friends_strings.my_map_proc_block(proc) { |friend| "#{friend}s" }).to eq(['Sharon', nil, nil, nil, nil])
     end
+
+    it 'Returns a modified array using proc instead of block' do
+      proc = proc { |friend| friend.length > 5 ? friend : nil }
+      expect(friends_strings.my_map_proc_block(proc) { |friend| "#{friend}s" }).not_to eq(['Sharon', 'a', nil, nil, nil])
+    end
   end
 end
