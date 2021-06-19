@@ -90,13 +90,17 @@ describe Enumerable do
     end
 
     it 'Returns a modified array' do
-      expect(ints.my_map { |i| i * i }).not_to eq([5,7,9])
+      expect(ints.my_map { |i| i * i }).not_to eq([5, 7, 9])
     end
   end
 
   describe '#my_inject' do
     it 'Returns the sum of array elements' do
       expect(ints.my_inject { |sum, friend| sum + friend }).to eq(ints.inject { |sum, friend| sum + friend })
+    end
+
+    it 'Returns the multiplication of array elements' do
+      expect(ints.my_inject { |mul, i| mul * i }).not_to eq([9, 16 , 20])
     end
   end
 
