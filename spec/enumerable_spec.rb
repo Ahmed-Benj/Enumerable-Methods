@@ -109,6 +109,11 @@ describe Enumerable do
       proc = proc { |friend| "#{friend}s" }
       expect(friends_strings.my_map_proc(proc)).to eq(%w[Sharons Leos Leilas Brians Aruns])
     end
+
+    it 'Returns a modified array using proc' do
+      proc = proc { |friend| "#{friend}s" }
+      expect(friends_strings.my_map_proc(proc)).not_to eq(%w[Sharonv Leos Leilas Brians Aruns])
+    end
   end
 
   describe '#my_map_proc_block' do
