@@ -44,6 +44,10 @@ describe Enumerable do
                                                                             friend.length > 5
                                                                           end)
     end
+
+    it 'Returns false if not all friends length > 5' do
+      expect(friends_strings.my_all { |friend| friend.length > 5 }).to eq(false)
+    end
   end
 
   describe '#my_any' do
