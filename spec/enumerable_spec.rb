@@ -100,7 +100,7 @@ describe Enumerable do
     end
 
     it 'Returns the multiplication of array elements' do
-      expect(ints.my_inject { |mul, i| mul * i }).not_to eq([9, 16 , 20])
+      expect(ints.my_inject { |mul, i| mul * i }).not_to eq([9, 16, 20])
     end
   end
 
@@ -124,7 +124,9 @@ describe Enumerable do
 
     it 'Returns a modified array using proc instead of block' do
       proc = proc { |friend| friend.length > 5 ? friend : nil }
-      expect(friends_strings.my_map_proc_block(proc) { |friend| "#{friend}s" }).not_to eq(['Sharon', 'a', nil, nil, nil])
+      expect(friends_strings.my_map_proc_block(proc) do |friend|
+               "#{friend}s"
+             end).not_to eq(['Sharon', 'a', nil, nil, nil])
     end
   end
 end
