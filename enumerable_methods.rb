@@ -1,16 +1,17 @@
-# rubocop:disable all 
-# 2
+# rubocop:disable all
+
+# 2 3
 module Enumerable
   # 3
   def my_each
     if block_given?
       iterator = 0
-      arr = self.to_a
+      arr = to_a
       while iterator < arr.length
         yield(arr[iterator])
         iterator += 1
       end
-      return self
+      self
     else
       to_enum(__method__)
     end
@@ -20,12 +21,12 @@ module Enumerable
   def my_each_with_index
     if block_given?
       iterator = 0
-      arr = self.to_a
+      arr = to_a
       while iterator < arr.length
         yield(arr[iterator], iterator)
         iterator += 1
       end
-      return self
+      self
     else
       to_enum(__method__)
     end
@@ -38,7 +39,7 @@ module Enumerable
       my_each do |element|
         output_array.push(element) if yield(element)
       end
-      print output_array
+      output_array
     else
       to_enum(__method__)
     end
@@ -61,7 +62,6 @@ module Enumerable
       end
     end
     result = output_array.length == length
-    print result
   end
 
   # 7
@@ -80,7 +80,7 @@ module Enumerable
         result = true if obj
       end
     end
-    print result
+    result
   end
 
   # 8
@@ -100,7 +100,6 @@ module Enumerable
       end
     end
     result = output_array.length.zero?
-    print result
   end
 
   # 9
@@ -119,7 +118,7 @@ module Enumerable
         output += 1
       end
     end
-    print output
+    output
   end
 
   # 10
@@ -138,7 +137,7 @@ module Enumerable
     else
       to_enum(__method__)
     end
-    print output_array
+    output_array
   end
 
   # 11
@@ -172,7 +171,7 @@ module Enumerable
         end
       end
     end
-    print result
+    result
   end
 
   # 12
@@ -189,7 +188,7 @@ module Enumerable
       output_array.push(proc_arg.call(element))
     end
     # output_array.compact
-    print output_array
+    output_array
   end
 
   # 14
@@ -207,8 +206,10 @@ module Enumerable
       end
     end
     # output_array.compact
-    print output_array
+    output_array
   end
 end
 
- (1..10).my_each { |friend| puts friend }
+friends_ints = [3, 4, 5]
+puts friends_ints.my_each { |x| puts x * 5 }
+
