@@ -16,12 +16,16 @@ describe Enumerable do
   end
 
   describe '#my_each_with_index' do
-    it 'Executes a block of code' do
+    it 'Executes a block of code and returns the passed enum' do
       expect(friends.my_each_with_index do |friend, index|
                puts friend + index.to_s
              end).to eq(friends.each_with_index do |friend, index|
                           puts friend + index.to_s
                         end)
+    end
+
+    it 'Executes a block of code and returns the passed enum' do
+      expect((0..9).my_each_with_index { |x, y| x * y }).not_to eq((0..8))
     end
   end
 
