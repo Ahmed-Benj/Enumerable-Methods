@@ -88,6 +88,10 @@ describe Enumerable do
     it 'Returns a modified array' do
       expect(ints.my_map { |i| i * i }).to eq(ints.map { |i| i * i })
     end
+
+    it 'Returns a modified array' do
+      expect(ints.my_map { |i| i * i }).not_to eq([5,7,9])
+    end
   end
 
   describe '#my_inject' do
