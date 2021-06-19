@@ -209,3 +209,7 @@ module Enumerable
     output_array
   end
 end
+
+friends_ints = [3, 4, 5]
+puts friends_ints.my_each { |x| puts x * 5 }
+

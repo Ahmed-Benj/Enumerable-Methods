@@ -7,7 +7,11 @@ describe Enumerable do
 
   describe '#my_each' do
     it 'Executes a block of code' do
-      expect(ints.my_each { |x| (x * 5) }).to eq(ints.each { |x| (x * 5) })
+      expect(ints.my_each { |el| puts(5 + el) }).to eq(ints.each { |el| puts(5 + el) })
+    end
+
+    it 'Executes a block of code' do
+      expect(ints.my_each { |x| x + 5 }).not_to eq([0, 1])
     end
   end
 
