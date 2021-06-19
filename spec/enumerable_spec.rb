@@ -78,6 +78,10 @@ describe Enumerable do
     it 'Returns the number of elements in the array' do
       expect(friends_strings.my_count).to eq(friends_strings.count)
     end
+
+    it 'Returns the number of elements in the array' do
+      expect(friends_strings.my_count).not_to eq(20)
+    end
   end
 
   describe '#my_map' do
