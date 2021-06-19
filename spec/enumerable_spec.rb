@@ -65,8 +65,12 @@ describe Enumerable do
   end
 
   describe '#my_none' do
-    it 'Returns true if no friend length = 3' do
+    it 'Returns false if one friend length = 3' do
       expect(friends_strings.my_none { |friend| friend.length == 3 }).to eq(false)
+    end
+
+    it 'Returns true if no friend length = 8' do
+      expect(friends_strings.my_none { |friend| friend.length == 8 }).to eq(true)
     end
   end
 
